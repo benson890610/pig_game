@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pig Game</title>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <section id="finish-message"></section>
+
+    <main id="wrapper">
+
+        <div class="game-options">
+            <button id="new-game-btn"><i class="fa-solid fa-arrows-rotate"></i> NEW GAME</button>
+    
+            <div class="dice-content hidden">
+                <div id="dice-one" class="dice-number hidden" data-dice="1">
+                    <span style="position: absolute; top: 42%; right: 42%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                </div>
+                <div id="dice-two" class="dice-number hidden" data-dice="2">
+                    <span style="position: absolute; top: 16%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 16%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                </div>
+                <div id="dice-three" class="dice-number hidden" data-dice="3">
+                    <span style="position: absolute; top: 16%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; top: 42%; right: 42%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 16%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                </div>
+                <div id="dice-four" class="dice-number hidden" data-dice="4">
+                    <span style="position: absolute; top: 16%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 16%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; top: 16%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 16%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                </div>
+                <div id="dice-five" class="dice-number hidden" data-dice="5">
+                    <span style="position: absolute; top: 16%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 16%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 42%; left: 42%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; top: 16%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 16%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                </div>
+                <div id="dice-size" class="dice-number hidden" data-dice="6">
+                    <span style="position: absolute; top: 16%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 16%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 42%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 42%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; top: 16%; left: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                    <span style="position: absolute; bottom: 16%; right: 16%; background-color: red; width: 8px; height: 8px; border-radius: 50%;"></span>
+                </div>
+            </div>
+
+            <div class="roll-content">
+                <button id="roll-dice"><i class="fa-sharp fa-solid fa-cube"></i> ROLL DICE</button>
+                <button id="hold-dice"><i class="fa-solid fa-shield"></i> HOLD</button>
+            </div>
+        </div>
+
+        <section id="player-1" class="current-player">
+
+            <div class="player-info">
+                <h2>PLAYER 1</h2>
+                <div id="player-1-total-score">0</div>
+            </div>
+
+            <div class="player-current-info">
+                <h2>CURRENT</h2>
+                <div id="player-1-current-score">0</div>
+            </div>
+
+        </section>
+
+        <section id="player-2" class="waiting-player">
+
+            <div>
+                <h2>PLAYER 2</h2>
+                <div id="player-2-total-score">0</div>
+            </div>
+
+            <div class="player-current-info">
+                <h2>CURRENT</h2>
+                <div id="player-2-current-score">0</div>
+            </div>
+
+        </section>
+
+    </main>
+    
+    <script src="app.js"></script>
+</body>
+</html>

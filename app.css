@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Lato', sans-serif;
+}
+
+body {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom right, #DC143C, #8B008B);
+}
+
+h2 {
+    font-weight: normal;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    width: 800px;
+    height: 600px;
+    background-color: transparent;
+    border-radius: 10px;
+}
+
+#player-1{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: inherit;
+    background-color: white;
+    border-top-left-radius: inherit;
+    border-bottom-left-radius: inherit;
+    padding: 70px 0;
+}
+
+#player-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+    height: inherit;
+    background-color: white;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    padding: 70px 0;
+}
+
+#player-2-total-score,   #player-1-total-score,
+#player-2-current-score, #player-1-current-score {
+    text-align: center;
+    font-size: 30px;
+}
+
+.player-current-info {
+    padding: 15px 30px;
+    background-color: #8B008B;
+    border-radius: 10px;
+    color: white;
+}
+
+.player-current-info h2 {
+    font-size: 16px;
+}
+
+.player-current-info #player-1-current-score, .player-current-info #player-2-current-score {
+    font-size: 20px;
+}
+
+.game-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: inherit;
+    z-index: 999;
+    background-color: transparent;
+}
+
+#new-game-btn {
+    margin: 25px 0;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .4s ease;
+    opacity: 0.7;
+    font-size: 12px;
+}
+
+#new-game-btn:hover,
+.roll-content button:hover {
+    background-color: #8B008B;
+    color: white;
+}
+
+.dice-content {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background-color: white;
+    margin-top: 40px;
+}
+
+.roll-content {
+    width: 100%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    position: absolute; 
+    bottom: 70px;
+}
+
+.roll-content button {
+    border: none;
+    background-color: white;
+    opacity: 0.7;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .4s ease;
+    font-size: 12px;
+}
+
+.dice-content .dice-number {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.current-player {
+    opacity: 0.6;
+}
+
+.waiting-player {
+    opacity: 0.3;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.show-with-padding {
+    padding: 20px 0;
+}
+
+#finish-message {
+    width: 800px;  
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    background: linear-gradient(to right bottom, #008B8B, #006400);
+    position: absolute; 
+    top: 40px; 
+    left: 50%; 
+    transform: translateX(-50%)
+}
