@@ -33,24 +33,31 @@ const player2 = {
 }
 
 newGameBtn.addEventListener('click', function(){
-    player1.hasMove = losserPlay === player1.name ? true : false;
+    // Reset players data
     player1.hasWon  = false;
     player1.total   = 0;
     player1.current = 0;
     player1.moves   = 0;
 
-    player2.hasMove = losserPlay === player2.name ? true : false;
     player2.hasWon  = false;
     player2.total   = 0;
     player2.current = 0;
     player2.moves   = 0;
 
-    document.querySelector(player1.currentId).textContent  = '0';
-    document.querySelector(player2.currentId).textContent  = '0';
+    // Make losser player play first next game
+    if ( player1.name === losserPlay ) {
+        player1.hasMove       = true;
+        player2.hasMove       = false;
+        player1.dom.className = 'current-player';
+        player2.dom.className = 'waiting-player';
+    } else {
+        player1.hasMove       = false;
+        player2.hasMove       = true;
+        player2.dom.className = 'current-player';
+        player1.dom.className = 'waiting-player';
+    }
 
-    document.querySelector(player1.totalId).textContent  = '0';
-    document.querySelector(player2.totalId).textContent  = '0';
-
+    // Remove winner background color
     if ( player1.dom.classList.contains('winner-player') ) {
         player1.dom.classList.remove('winner-player');
     }
@@ -59,14 +66,13 @@ newGameBtn.addEventListener('click', function(){
         player2.dom.classList.remove('winner-player');
     }
 
-    if ( player1.name === losserPlay ) {
-        player1.dom.className = 'current-player';
-        player2.dom.className = 'waiting-player';
-    } else {
-        player2.dom.className = 'current-player';
-        player1.dom.className = 'waiting-player';
-    }
-    
+    // Reset current dom result
+    document.querySelector(player1.currentId).textContent  = '0';
+    document.querySelector(player2.currentId).textContent  = '0';
+
+    document.querySelector(player1.totalId).textContent  = '0';
+    document.querySelector(player2.totalId).textContent  = '0';
+
     document.querySelector('#finish-message').textContent = '';
 
     if(document.querySelector('#finish-message').classList.contains('show-with-padding')) {
@@ -82,6 +88,7 @@ newGameBtn.addEventListener('click', function(){
 rollDiceBtn.addEventListener('click', function(){
     let dice = getRandomDice();
 
+    // Prevent same dice number
     while ( dice === prevDiceNumber ) {
         dice = getRandomDice();
     }
@@ -90,6 +97,7 @@ rollDiceBtn.addEventListener('click', function(){
     const diceContent = document.querySelector('.dice-content');
     const diceElement = diceArray.find(number => dice === Number(number.dataset.dice) );
 
+    // If game finished point players to press `New game` button
     if ( startNewGame() ) {
         document.querySelector('#finish-message').textContent = `Start new game`;
         if ( ! document.querySelector('#finish-message').classList.contains('show-with-padding') ) {
@@ -109,6 +117,7 @@ rollDiceBtn.addEventListener('click', function(){
 
 holdDiceBtn.addEventListener('click', function() {
 
+    // If game finished point players to press `New game` button
     if ( startNewGame() ) {
         document.querySelector('#finish-message').textContent = `Start new game`;
         if ( ! document.querySelector('#finish-message').classList.contains('show-with-padding') ) {
@@ -163,23 +172,21 @@ function finishGame(winner, losser) {
 function calcPlayerTurn(currPlayer, otherPlayer, diceContent, diceElement) {
     let score = Number(diceElement.dataset.dice);
 
+    // Remove previous dice to show new dice
     if ( prevDiceContent != undefined && prevDiceElement != undefined ) {
         prevDiceContent.classList.add('hidden');
         prevDiceElement.classList.add('hidden');
     }
 
+    // Show dice
     diceContent.classList.remove('hidden');
     diceElement.classList.remove('hidden');
 
+    // Remeber previous dice
     prevDiceContent = diceContent;
     prevDiceElement = diceElement;
 
-    if ( currPlayer.moves === 0 ) {
-        setCurrentResult(currPlayer, score);
-        currPlayer.moves++;
-        return true;
-    } 
-
+    // If dice is lower than previous switch player
     if ( currPlayer.current > score ) {
         resetMoves(currPlayer, otherPlayer);
         setCurrentResult(currPlayer, 0);
@@ -187,6 +194,7 @@ function calcPlayerTurn(currPlayer, otherPlayer, diceContent, diceElement) {
         return true;
     }
 
+    // Write player current result
     setCurrentResult(currPlayer, score);
     currPlayer.moves++;
     return false;
