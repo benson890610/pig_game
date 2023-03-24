@@ -172,5 +172,6 @@ h2 {
     position: absolute; 
     top: 40px; 
     left: 50%; 
-    transform: translateX(-50%)
+    transform: translateX(-50%);
+    transition: all .4s ease;
 }

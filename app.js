@@ -6,6 +6,7 @@ const maxPoints   = 30;
 
 let prevDiceContent;
 let prevDiceElement;
+let prevDiceNumber = 0;
 
 const player1 = {
     name: 'Player 1',
@@ -65,7 +66,12 @@ newGameBtn.addEventListener('click', function(){
 });
 
 rollDiceBtn.addEventListener('click', function(){
-    let dice          = getRandomDice();
+    let dice = getRandomDice();
+
+    while ( dice === prevDiceNumber ) {
+        dice = getRandomDice();
+    }
+
     const diceArray   = Array.from(diceNumbers);
     const diceContent = document.querySelector('.dice-content');
     const diceElement = diceArray.find(number => dice === Number(number.dataset.dice) );
@@ -83,6 +89,8 @@ rollDiceBtn.addEventListener('click', function(){
     } else {
         calcPlayerTurn(player2, player1, diceContent, diceElement);
     }
+
+    prevDiceNumber = dice;
 });
 
 holdDiceBtn.addEventListener('click', function() {
@@ -97,7 +105,6 @@ holdDiceBtn.addEventListener('click', function() {
 
     if ( player1.hasMove ) {
         savePlayerTotal(player1);
-        console.log(player1.total);
 
         if ( player1.total >= maxPoints) {
             finishGame(player1, player2);
@@ -108,7 +115,6 @@ holdDiceBtn.addEventListener('click', function() {
         resetMoves(player1, player2);
     } else {
         savePlayerTotal(player2);
-        console.log(player2.total);
 
         if ( player2.total >= maxPoints) {
             finishGame(player2, player1);
@@ -128,6 +134,11 @@ function finishGame(winner, losser) {
     winner.hasWon = true;
     document.querySelector('#finish-message').textContent = `${winner.name} won the game`;
     document.querySelector('#finish-message').classList.add('show-with-padding');
+
+    setTimeout(function(){
+        document.querySelector('#finish-message').textContent = '';
+        document.querySelector('#finish-message').classList.remove('show-with-padding');
+    }, 3000);
 }
 
 function calcPlayerTurn(currPlayer, otherPlayer, diceContent, diceElement) {
