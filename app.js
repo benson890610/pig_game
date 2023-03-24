@@ -33,6 +33,14 @@ const player2 = {
 }
 
 newGameBtn.addEventListener('click', function(){
+
+    // Button animation
+    this.style.animation = 'buttonsAnimation 0.3s 1';
+    obj = this;
+    setTimeout(function(){
+        obj.removeAttribute('style');
+    }, 400);
+
     // Reset players data
     player1.hasWon  = false;
     player1.total   = 0;
@@ -86,6 +94,14 @@ newGameBtn.addEventListener('click', function(){
 });
 
 rollDiceBtn.addEventListener('click', function(){
+
+    // Button animation
+    this.style.animation = 'buttonsAnimation 0.3s 1';
+    obj = this;
+    setTimeout(function(){
+        obj.removeAttribute('style');
+    }, 400);
+
     let dice = getRandomDice();
 
     // Prevent same dice number
@@ -116,6 +132,13 @@ rollDiceBtn.addEventListener('click', function(){
 });
 
 holdDiceBtn.addEventListener('click', function() {
+
+    // Button animation
+    this.style.animation = 'buttonsAnimation 0.3s 1';
+    obj = this;
+    setTimeout(function(){
+        obj.removeAttribute('style');
+    }, 400);
 
     // If game finished point players to press `New game` button
     if ( startNewGame() ) {

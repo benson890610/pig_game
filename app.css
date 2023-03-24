@@ -103,6 +103,17 @@ h2 {
     transition: all .4s ease;
     opacity: 0.7;
     font-size: 12px;
+    transition: all .3s ease;
+}
+
+#roll-dice, #hold-dice {
+    transition: all .3s ease;
+    
+}
+
+.addAnimation {
+    animation-name: buttonsAnimation;
+    animation-duration: 1.2s;
 }
 
 #new-game-btn:hover,
@@ -179,4 +190,9 @@ h2 {
     left: 50%; 
     transform: translateX(-50%);
     transition: all .4s ease;
+}
+
+@keyframes buttonsAnimation {
+    from {position: relative;top: 3px;}
+    to {position: relative; top: 0;}
 }
