@@ -2,11 +2,12 @@ const rollDiceBtn = document.querySelector('#roll-dice');
 const holdDiceBtn = document.querySelector('#hold-dice');
 const newGameBtn  = document.querySelector('#new-game-btn');
 const diceNumbers = document.querySelectorAll('.dice-number');
-const maxPoints   = 30;
+const maxPoints   = 10;
 
 let prevDiceContent;
 let prevDiceElement;
 let prevDiceNumber = 0;
+let losserPlay     = '';
 
 const player1 = {
     name: 'Player 1',
@@ -32,13 +33,13 @@ const player2 = {
 }
 
 newGameBtn.addEventListener('click', function(){
-    player1.hasMove = true;
+    player1.hasMove = losserPlay === player1.name ? true : false;
     player1.hasWon  = false;
     player1.total   = 0;
     player1.current = 0;
     player1.moves   = 0;
 
-    player2.hasMove = false;
+    player2.hasMove = losserPlay === player2.name ? true : false;
     player2.hasWon  = false;
     player2.total   = 0;
     player2.current = 0;
@@ -50,9 +51,22 @@ newGameBtn.addEventListener('click', function(){
     document.querySelector(player1.totalId).textContent  = '0';
     document.querySelector(player2.totalId).textContent  = '0';
 
-    player1.dom.className = 'current-player';
-    player2.dom.className = 'waiting-player';
+    if ( player1.dom.classList.contains('winner-player') ) {
+        player1.dom.classList.remove('winner-player');
+    }
 
+    if ( player2.dom.classList.contains('winner-player') ) {
+        player2.dom.classList.remove('winner-player');
+    }
+
+    if ( player1.name === losserPlay ) {
+        player1.dom.className = 'current-player';
+        player2.dom.className = 'waiting-player';
+    } else {
+        player2.dom.className = 'current-player';
+        player1.dom.className = 'waiting-player';
+    }
+    
     document.querySelector('#finish-message').textContent = '';
 
     if(document.querySelector('#finish-message').classList.contains('show-with-padding')) {
@@ -132,6 +146,11 @@ function startNewGame() {
 
 function finishGame(winner, losser) {
     winner.hasWon = true;
+    losserPlay    = losser.name;
+
+    winner.dom.classList.remove('current-player');
+    winner.dom.classList.add('winner-player');
+
     document.querySelector('#finish-message').textContent = `${winner.name} won the game`;
     document.querySelector('#finish-message').classList.add('show-with-padding');
 
